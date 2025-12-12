@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tema Clean & Elegante - Tons neutros com acento azul suave */
+    --background: 0 0% 99%;
+    --foreground: 240 10% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 20%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4% 95%;
+    --secondary-foreground: 240 10% 20%;
+    --muted: 240 4% 96%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 240 4% 96%;
+    --accent-foreground: 240 10% 20%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 10% 8%;
+    --foreground: 240 4% 95%;
+    --card: 240 10% 10%;
+    --card-foreground: 240 4% 95%;
+    --popover: 240 10% 10%;
+    --popover-foreground: 240 4% 95%;
+    --primary: 217 91% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 6% 20%;
+    --secondary-foreground: 240 4% 95%;
+    --muted: 240 6% 20%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 6% 20%;
+    --accent-foreground: 240 4% 95%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 25%;
+    --input: 240 6% 25%;
+    --ring: 217 91% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+
+  /* Scrollbar elegante */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+  }
+  
+  /* Seleção de texto sutil */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+  
+  ::-moz-selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Animações suaves */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Classes utilitárias */
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Card elegante */
+  .card-elegant {
+    @apply bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  
+  .card-elegant-hover {
+    @apply hover:border-primary/30 hover:shadow-lg transition-all duration-300;
+  }
+  
+  /* Botões elegantes */
+  .btn-elegant {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg 
+           hover:bg-primary/90 transition-all duration-200 hover:shadow-md active:scale-[0.98];
+  }
+  
+  .btn-elegant-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-border bg-transparent text-foreground font-medium rounded-lg 
+           hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98];
+  }
+  
+  /* Gradiente sutil */
+  .gradient-subtle {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.05) 100%);
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500;
+  }
+  
+  /* Glass effect */
+  .glass {
+    @apply backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border border-white/20 dark:border-gray-700/20;
+  }
+  
+  /* Subtle shadow */
+  .shadow-subtle {
+    box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Linha divisória elegante */
+  .divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+  
+  /* Ícones elegantes */
+  .icon-container {
+    @apply w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary;
+  }
+  
+  /* Badge elegante */
+  .badge-elegant {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20;
+  }
+}
+
+/* Tipografia elegante */
+h1, h2, h3, h4 {
+  @apply tracking-tight font-semibold;
+}
+
+p {
+  @apply leading-relaxed text-muted-foreground;
+}
+
+/* Efeito de foco para acessibilidade */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-background;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container-elegant {
+    @apply px-4;
+  }
+  
+  .btn-elegant, .btn-elegant-outline {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+/* Custom selection para código */
+code, pre {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  @apply text-sm;
+}
+
+/* Animação de entrada suave para elementos */
+.stagger-item {
+  animation: fade-up 0.6s ease-out forwards;
+}
