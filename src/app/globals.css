@@ -323,16 +323,141 @@ p {
     @apply px-4 py-2.5 text-sm;
   }
 }
-
-/* Custom selection para código - estilo dark mysterious */
-code, pre {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-  @apply text-sm bg-gray-900 text-orange-200 rounded-md px-2 py-1 border border-orange-900/50;
+/* ESTILOS CLEAN PARA BLOCO DE CÓDIGO - MESMO BACKGROUND DO CONTEÚDO */
+.dark pre code.hljs {
+  background: transparent !important;
+  color: #e5e7eb !important;
 }
 
-pre {
-  @apply p-4 overflow-x-auto bg-gradient-to-br from-gray-900 to-gray-950 
-         border border-orange-900/30 rounded-lg shadow-inner;
+/* Cor específica para f-strings do Python - chaves {} */
+.dark .hljs-subst,
+.dark .hljs-variable,
+.dark .hljs-template-variable {
+  color: #f472b6 !important; /* rosa para variáveis */
+}
+
+.dark .hljs-string {
+  color: #34d399 !important; /* verde para strings */
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-literal {
+  color: #fbbf24 !important; /* amarelo laranja */
+}
+
+.dark .hljs-title,
+.dark .hljs-name {
+  color: #60a5fa !important; /* azul para funções */
+}
+
+.dark .hljs-built_in {
+  color: #f59e0b !important; /* laranja para built-ins */
+}
+
+.dark .hljs-comment {
+  color: #9ca3af !important; /* cinza para comentários */
+  font-style: italic;
+}
+
+.dark .hljs-number {
+  color: #f472b6 !important; /* rosa para números */
+}
+
+.dark .hljs-attribute,
+.dark .hljs-attr {
+  color: #34d399 !important; /* verde para atributos */
+}
+
+/* Para as chaves {} das f-strings - IMPORTANTE! */
+.dark .hljs-punctuation {
+  color: #e5e7eb !important; /* branco/cinza claro para pontuação */
+}
+
+.dark .hljs-operator {
+  color: #94a3b8 !important; /* cinza médio para operadores */
+}
+
+/* SCROLLBAR FINO E DISCRETO */
+pre::-webkit-scrollbar {
+  height: 4px !important;
+}
+
+pre::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3) !important;
+  border-radius: 2px !important;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5) !important;
+}
+
+/* Para Light Mode também */
+.light pre code.hljs {
+  background: transparent !important;
+  color: #1f2937 !important;
+}
+
+.light .hljs-subst,
+.light .hljs-variable,
+.light .hljs-template-variable {
+  color: #db2777 !important;
+}
+
+.light .hljs-string {
+  color: #059669 !important;
+}
+
+.light .hljs-keyword,
+.light .hljs-selector-tag,
+.light .hljs-literal {
+  color: #d97706 !important;
+}
+
+.light .hljs-punctuation {
+  color: #1f2937 !important;
+}
+
+.light .hljs-comment {
+  color: #6b7280 !important;
+  font-style: italic;
+}
+
+/* SCROLLBAR FINO */
+pre::-webkit-scrollbar {
+  height: 4px !important;
+  width: 4px !important;
+}
+
+pre::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.3) !important;
+  border-radius: 2px !important;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.5) !important;
+}
+
+/* Para tabelas */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px !important;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.2) !important;
+  border-radius: 2px !important;
 }
 
 /* Animação de entrada stagada para elementos */
@@ -423,4 +548,65 @@ pre {
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
+}
+/* Estilo para scrollbars finos */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(75, 85, 99, 0.7);
+}
+
+/* Para tabelas também */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, 
+    rgba(249, 115, 22, 0.3), 
+    rgba(249, 115, 22, 0.5)
+  );
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, 
+    rgba(249, 115, 22, 0.5), 
+    rgba(249, 115, 22, 0.7)
+  );
 }

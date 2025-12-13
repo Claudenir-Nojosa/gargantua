@@ -478,20 +478,20 @@ export default function BlogHomePage() {
         {/* Padrão de grade sutil */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-          <div className="text-center max-w-3xl mx-auto">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="text-center max-w-2xl mx-auto">
             {/* Logo Gargantua */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-6">
               <div className="relative group">
                 {/* Glow effect around logo */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-600/20 to-orange-800/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-700"></div>
-                <div className="">
+                <div className="absolute -inset-2 bg-gradient-to-r from-orange-600/20 to-orange-800/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-500"></div>
+                <div>
                   <Image
                     src="https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/refs/heads/main/logo-branca.png"
                     alt="Gargantua Logo"
-                    width={120}
-                    height={120}
-                    className="w-24 h-24 md:w-32 md:h-32 object-contain filter drop-shadow-lg"
+                    width={80}
+                    height={80}
+                    className="w-16 h-16 md:w-20 md:h-20 object-contain filter drop-shadow-md"
                     priority
                   />
                 </div>
@@ -500,35 +500,35 @@ export default function BlogHomePage() {
 
             {/* Título com efeito de brilho */}
             <div className="relative">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-                <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-200 dark:from-orange-500 dark:via-orange-400 dark:to-orange-300 bg-clip-text text-transparent drop-shadow-lg">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight">
+                <span className="bg-gradient-to-r from-orange-400 via-orange-300 to-orange-200 dark:from-orange-500 dark:via-orange-400 dark:to-orange-300 bg-clip-text text-transparent drop-shadow-md">
                   Gargantua
                 </span>
-                <span className="block text-2xl md:text-3xl lg:text-4xl font-light text-orange-300/70 mt-2">
+                <span className="block text-base md:text-lg lg:text-xl font-light text-orange-300/70 mt-1">
                   Data Science Insights
                 </span>
               </h1>
 
               {/* Efeito de brilho atrás do texto */}
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-orange-600/10 rounded-full blur-3xl"></div>
+              <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-48 h-48 bg-orange-600/10 rounded-full blur-2xl"></div>
             </div>
 
             {/* Descrição */}
-            <p className="text-lg md:text-xl text-orange-200/80 mb-10 leading-relaxed relative z-10">
+            <p className="text-sm md:text-base text-orange-200/80 mb-6 leading-relaxed relative z-10">
               {t("blog.hero.description")}
             </p>
 
             {/* Barra de pesquisa com glow */}
             <div className="max-w-md mx-auto">
               <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-orange-800 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-orange-800 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-700 group-hover:duration-200"></div>
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-orange-400/80 group-focus-within:text-orange-300 transition-colors" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-orange-400/80 group-focus-within:text-orange-300 transition-colors" />
                   <Input
                     placeholder={t("blog.search")}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 bg-gray-900/60 border-orange-800/30 text-white placeholder:text-orange-300/60 focus:border-orange-500/50 focus:ring-orange-500/20 backdrop-blur-sm relative"
+                    className="pl-9 bg-gray-900/60 border-orange-800/30 text-white placeholder:text-orange-300/60 focus:border-orange-500/50 focus:ring-orange-500/20 backdrop-blur-sm text-sm h-10"
                   />
                 </div>
               </div>
@@ -733,7 +733,7 @@ export default function BlogHomePage() {
                                   src={post.coverImage}
                                   alt={post.title}
                                   fill
-                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                  className="object-cover transition-transform duration-300"
                                   sizes="(max-width: 768px) 100vw, 192px"
                                 />
                                 {/* Overlay sutil */}
@@ -819,7 +819,7 @@ export default function BlogHomePage() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="self-start md:self-center gap-1 group-hover:gap-2 transition-all"
+                            className="self-start md:self-center gap-1 transition-all"
                             onClick={(e) => {
                               e.stopPropagation();
                               navigateToPost(post.slug);

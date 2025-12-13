@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
         hostname: "cdn-images-1.medium.com",
         pathname: "/**",
       },
+      // ADICIONE ESTE BLOCO PARA O MIRO.MEDIUM.COM
+      {
+        protocol: "https",
+        hostname: "miro.medium.com",
+        pathname: "/**",
+      },
       // Adicione outros domínios conforme necessário
     ],
   },

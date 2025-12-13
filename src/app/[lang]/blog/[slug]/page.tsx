@@ -7,6 +7,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/github.css";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -27,6 +28,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
 // Importe seus componentes customizados
 import { BlogPost } from "../../../../../types/types";
@@ -64,52 +66,130 @@ const translateCategory = (category: string, lang: string) => {
   return categoryMap[category]?.[lang] || category;
 };
 
-// Componentes customizados para MDX
+// Componentes customizados para MDX - ATUALIZADOS
 const components = {
   h1: (props: any) => (
-    <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />
+    <h1 className="text-4xl font-bold mt-8 mb-6 text-foreground" {...props} />
   ),
   h2: (props: any) => (
-    <h2 className="text-3xl font-bold mt-6 mb-3" {...props} />
+    <h2 className="text-3xl font-bold mt-8 mb-4 text-foreground" {...props} />
   ),
   h3: (props: any) => (
-    <h3 className="text-2xl font-bold mt-5 mb-3" {...props} />
+    <h3 className="text-2xl font-bold mt-6 mb-3 text-foreground" {...props} />
   ),
-  p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
-  code: (props: any) => (
-    <code
-      className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm"
-      {...props}
-    />
+  h4: (props: any) => (
+    <h4 className="text-xl font-bold mt-6 mb-2 text-foreground" {...props} />
   ),
-  pre: (props: any) => (
-    <pre
-      className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"
-      {...props}
-    />
+  p: (props: any) => (
+    <p className="my-4 leading-relaxed text-foreground/90" {...props} />
   ),
-  ul: (props: any) => <ul className="list-disc pl-6 my-4" {...props} />,
-  ol: (props: any) => <ol className="list-decimal pl-6 my-4" {...props} />,
+  code: (props: any) => {
+    // Check if this is inline code or block code
+    const isInline = !props.className;
+
+    if (isInline) {
+      return (
+        <code
+          className="bg-muted text-foreground px-1.5 py-0.5 rounded text-sm font-mono"
+          {...props}
+        />
+      );
+    }
+
+    return <code {...props} />;
+  },
+  pre: (props: any) => {
+    const isOutput =
+      props.children?.props?.className?.includes("language-text");
+    const isInput =
+      props.children?.props?.className?.includes("language-python");
+
+    return (
+      <div className="my-6">
+        {isInput && (
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/30 rounded-t-lg">
+            <div className="w-2 h-2 rounded-full bg-orange-500 dark:bg-orange-400"></div>
+            <span className="text-xs font-medium text-orange-700 dark:text-orange-300">
+              Input
+            </span>
+          </div>
+        )}
+        {isOutput && (
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-800/30 rounded-t-lg">
+            <div className="w-2 h-2 rounded-full bg-gray-500 dark:bg-gray-400"></div>
+            <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+              Output
+            </span>
+          </div>
+        )}
+        <div className="overflow-x-auto rounded-b-lg border border-gray-200 dark:border-gray-800/50">
+          <pre
+            className={`
+            ${isInput || isOutput ? "rounded-t-none" : "rounded-lg"}
+            p-4 text-sm font-mono
+            bg-white dark:bg-gray-900/40
+            text-gray-900 dark:text-gray-100
+            min-w-min
+          `}
+            {...props}
+          />
+        </div>
+      </div>
+    );
+  },
+  ul: (props: any) => (
+    <ul className="list-disc pl-6 my-4 space-y-2" {...props} />
+  ),
+  ol: (props: any) => (
+    <ol className="list-decimal pl-6 my-4 space-y-2" {...props} />
+  ),
   a: (props: any) => (
     <a
-      className="text-blue-500 hover:underline"
+      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors"
       target="_blank"
       rel="noopener noreferrer"
       {...props}
     />
   ),
   img: (props: any) => (
-    <img
-      className="rounded-lg my-6 mx-auto max-w-full"
-      alt={props.alt || ""}
-      {...props}
-    />
+    <div className="my-8">
+      <img
+        className="rounded-lg mx-auto max-w-full border border-border"
+        alt={props.alt || ""}
+        {...props}
+      />
+    </div>
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="border-l-4 border-gray-300 pl-4 italic my-6"
+      className="border-l-4 border-primary pl-4 italic my-6 py-2 bg-muted/50 text-foreground/80"
       {...props}
     />
+  ),
+  table: (props: any) => (
+    <div className="overflow-x-auto my-8 border border-border rounded-lg scrollbar-thin">
+      <table className="min-w-full divide-y divide-border text-sm" {...props} />
+    </div>
+  ),
+  thead: (props: any) => <thead className="bg-muted" {...props} />,
+  tbody: (props: any) => (
+    <tbody className="divide-y divide-border" {...props} />
+  ),
+  th: (props: any) => (
+    <th
+      className="px-4 py-3 text-left font-semibold text-foreground border-b border-border"
+      {...props}
+    />
+  ),
+  td: (props: any) => (
+    <td
+      className="px-4 py-3 text-foreground/90 border-b border-border"
+      {...props}
+    />
+  ),
+  hr: (props: any) => <hr className="my-8 border-border" {...props} />,
+  strong: (props: any) => (
+    <strong className="font-semibold text-foreground" {...props} />
   ),
 };
 
@@ -136,7 +216,7 @@ const getCategoryColor = (
 };
 
 export default async function BlogPostPage({ params }: PageProps) {
-   const { lang, slug } = await params;
+  const { lang, slug } = await params;
 
   const post = await getPost(slug, lang);
 
@@ -203,7 +283,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       allArticles: "Alle Artikel",
       home: "Startseite",
       blogDescription:
-        "Entdecken Sie Tutorials, Einblicke und Projekte zu maschinellem Lernen, Datenanalyse und künstlicher Intelligenz.",
+        "Entdecken Sie Tutorials, Einblicke und Projekte zu maschinellem Lernen, dadosanalyse und künstlicher Intelligenz.",
       quickLinks: "Schnellzugriff",
       allRightsReserved: "Alle Rechte vorbehalten.",
       builtWithPassion: "Mit Leidenschaft für Technologie gebaut.",
@@ -236,7 +316,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section do artigo - MODIFICADO: Menor e mais clean */}
-      <div className="relative border-b">
+      <div className="relative border-b border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
@@ -273,7 +353,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </div>
             {/* Título */}
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-foreground">
               {post.title}
             </h1>
             {/* Descrição */}
@@ -290,19 +370,21 @@ export default async function BlogPostPage({ params }: PageProps) {
                 ))}
               </div>
             )}
-            <div className="flex items-center justify-between pt-6 border-t">
+            <div className="flex items-center justify-between pt-6 border-t border-border">
               <div className="flex items-center gap-3">
-                {/* Substitua o bloco do ícone de usuário por este */}
-                <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
                   <Image
                     src="/autor.jpg"
                     alt={`Foto de ${post.author}`}
                     width={50}
                     height={50}
+                    className="object-cover"
                   />
                 </div>
                 <div>
-                  <p className="font-medium text-sm">{post.author}</p>
+                  <p className="font-medium text-sm text-foreground">
+                    {post.author}
+                  </p>
                   <p className="text-xs text-muted-foreground">{t.author}</p>
                 </div>
               </div>
@@ -312,10 +394,10 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* Conteúdo principal */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Imagem de capa (movida para dentro do conteúdo) */}
         {post.coverImage && (
-          <div className="relative h-64 md:h-80 w-full rounded-xl overflow-hidden mb-8">
+          <div className="relative h-64 md:h-80 w-full rounded-xl overflow-hidden mb-8 border border-border">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -329,49 +411,88 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
 
         {/* Conteúdo MDX */}
-        <div className="prose prose-lg dark:prose-invert max-w-none mb-16">
-          <MDXRemote
-            source={post.content}
-            components={components}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [rehypeHighlight],
-              },
-            }}
-          />
+        <div className="mb-16">
+          <article
+            className="prose prose-lg dark:prose-invert max-w-none
+      prose-headings:text-foreground
+      prose-p:text-foreground/90
+      prose-strong:text-foreground
+      prose-li:text-foreground/90
+      prose-blockquote:text-foreground/80
+      prose-code:text-foreground
+      prose-pre:!bg-gray-50
+      prose-pre:!text-gray-900
+      prose-pre:!border prose-pre:!border-gray-200
+      dark:prose-pre:!bg-gray-900/80
+      dark:prose-pre:!text-gray-200
+      dark:prose-pre:!border-gray-700/50
+      prose-table:border-border
+      prose-th:text-foreground
+      prose-td:text-foreground/90
+      prose-a:text-blue-500
+      dark:prose-a:text-blue-400
+      hover:prose-a:text-blue-600
+      dark:hover:prose-a:text-blue-300
+    "
+          >
+            <MDXRemote
+              source={post.content}
+              components={components}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [
+                    [
+                      rehypeHighlight,
+                      {
+                        detect: true,
+                        ignoreMissing: true,
+                      },
+                    ],
+                  ],
+                },
+              }}
+            />
+          </article>
         </div>
 
         {/* Tags no final do artigo */}
         {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-8">
-            <span className="text-sm font-medium mr-2">{t.tags}:</span>
-            {post.tags.map((tag, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                #{tag}
-              </Badge>
-            ))}
-          </div>
+          <Card className="p-6 mb-8 bg-card border-border">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-sm font-medium text-foreground">
+                {t.tags}:
+              </span>
+              {post.tags.map((tag, index) => (
+                <Badge key={index} variant="secondary" className="text-xs">
+                  #{tag}
+                </Badge>
+              ))}
+            </div>
+          </Card>
         )}
       </main>
 
       {/* Footer com duas colunas */}
-      <footer className="border-t bg-card mt-20">
+      <footer className="border-t border-border bg-card mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Coluna da ESQUERDA - Brand */}
             <div className="space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-400 to-orange-500 dark:from-orange-800 dark:to-orange-900 flex items-center justify-center">
                   <Image
                     src="https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/refs/heads/main/logo-branca.png"
                     width={40}
                     height={40}
                     alt="Gargantua Logo"
+                    className="filter brightness-0 invert"
                   />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">Gargantua</h3>
+                  <h3 className="text-2xl font-bold text-foreground">
+                    Gargantua
+                  </h3>
                   <p className="text-sm text-muted-foreground">
                     Data Science Insights
                   </p>
@@ -386,7 +507,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="md:text-right space-y-8">
               {/* Quick Links */}
               <div>
-                <h4 className="font-semibold mb-4 text-left md:text-right">
+                <h4 className="font-semibold mb-4 text-left md:text-right text-foreground">
                   {t.quickLinks}
                 </h4>
                 <ul className="space-y-3">
@@ -425,7 +546,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           {/* Copyright */}
-          <div className="mt-12 pt-8 border-t text-center">
+          <div className="mt-12 pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Gargantua. {t.allRightsReserved}
             </p>
