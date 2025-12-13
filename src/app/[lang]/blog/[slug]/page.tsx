@@ -114,10 +114,10 @@ const components = {
 };
 
 interface PageProps {
-  params: {
+  params: Promise<{
     lang: string;
     slug: string;
-  };
+  }>;
 }
 
 // Função para obter cores de categoria
@@ -136,7 +136,7 @@ const getCategoryColor = (
 };
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { lang, slug } = params;
+   const { lang, slug } = await params;
 
   const post = await getPost(slug, lang);
 
