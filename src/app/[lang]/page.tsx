@@ -662,7 +662,14 @@ export default function BlogHomePage() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center">
-                          <User className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                            <Image
+                              src="/autor.jpg"
+                              alt={`Foto do autor`}
+                              width={50}
+                              height={50}
+                            />
+                          </div>
                         </div>
                         <div>
                           <p className="font-medium">{t("blog.writtenBy")}</p>
@@ -791,7 +798,14 @@ export default function BlogHomePage() {
 
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <User className="h-4 w-4 text-muted-foreground" />
+                                <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                                  <Image
+                                    src="/autor.jpg"
+                                    alt={`Foto do autor`}
+                                    width={50}
+                                    height={50}
+                                  />
+                                </div>
                                 <span className="text-sm text-muted-foreground">
                                   {post.author}
                                 </span>

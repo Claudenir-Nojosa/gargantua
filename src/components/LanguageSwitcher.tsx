@@ -5,11 +5,13 @@ import { useTranslation } from "react-i18next";
 import { useRouter, useParams } from "next/navigation";
 import { Globe } from "lucide-react";
 import Portal from "./Portal";
+import { useTheme } from "next-themes";
 
 export default function LanguageSwitcherGlobeFlags() {
   const { i18n } = useTranslation();
   const router = useRouter();
   const params = useParams();
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
@@ -29,39 +31,72 @@ export default function LanguageSwitcherGlobeFlags() {
     },
   ];
 
-  const changeLanguage = async (lng: string) => {
-    try {
-      // 1. Muda o idioma no i18n
-      await i18n.changeLanguage(lng);
-      
-      // 2. Obtém a rota atual
-      const currentPath = window.location.pathname;
-      
-      // 3. Extrai o caminho sem o idioma atual
-      // Ex: /pt/blog → /blog
-      const currentLang = params?.lang as string || 'pt';
-      let newPath = currentPath;
-      
-      // Remove o idioma atual da URL
-      if (currentPath.startsWith(`/${currentLang}`)) {
-        newPath = currentPath.replace(`/${currentLang}`, '');
-        // Se ficar vazio, coloca apenas /
-        if (newPath === '') newPath = '/';
-      }
-      
-      // 4. Adiciona o novo idioma
-      const newUrl = `/${lng}${newPath === '/' ? '' : newPath}`;
-      
-      // 5. Navega para a nova URL
-      router.push(newUrl);
-      
-    } catch (error) {
-      console.error("Erro ao mudar idioma:", error);
-    } finally {
-      setIsOpen(false);
+const changeLanguage = async (lng: string) => {
+  try {
+    // 1. Seta flag global para bloquear next-themes
+    window.__THEME_LOCKED = true;
+    
+    // 2. Captura e salva o tema de forma EXTREMAMENTE agressiva
+    const html = document.documentElement;
+    const isDark = html.classList.contains("dark");
+    const currentTheme = isDark ? "dark" : "light";
+    
+    console.log("🔒 Bloqueando next-themes, tema atual:", currentTheme);
+    
+    // 3. Salva em MÚLTIPLOS lugares
+    localStorage.setItem("theme", currentTheme);
+    localStorage.setItem("gargantua-theme", currentTheme);
+    sessionStorage.setItem("theme-backup", currentTheme);
+    
+    // 4. Aplica diretamente no HTML (mais importante!)
+    html.classList.remove("light", "dark");
+    html.classList.add(currentTheme);
+    
+    // 5. Muda idioma
+    await i18n.changeLanguage(lng);
+    
+    // 6. Constrói URL
+    const currentPath = window.location.pathname;
+    const currentLang = params?.lang as string || 'pt';
+    let newPath = currentPath;
+    
+    if (currentPath.startsWith(`/${currentLang}`)) {
+      newPath = currentPath.replace(`/${currentLang}`, '');
+      if (newPath === '') newPath = '/';
     }
-  };
-
+    
+    const newUrl = `/${lng}${newPath === '/' ? '' : newPath}`;
+    
+    // 7. Pequena pausa para garantir tudo foi salvo
+    await new Promise(resolve => setTimeout(resolve, 30));
+    
+    // 8. Navegação
+    router.replace(newUrl);
+    
+    // 9. Verificação pós-navegação
+    setTimeout(() => {
+      console.log("🔍 Verificação pós-navegação - Tema deve ser:", currentTheme);
+      const htmlAfter = document.documentElement;
+      if (!htmlAfter.classList.contains(currentTheme)) {
+        console.warn("⚠️ Tema foi perdido! Restaurando...");
+        htmlAfter.classList.remove("light", "dark");
+        htmlAfter.classList.add(currentTheme);
+      }
+      // Libera o bloqueio após 2 segundos
+      setTimeout(() => {
+        window.__THEME_LOCKED = false;
+        console.log("🔓 Bloqueio do tema liberado");
+      }, 2000);
+    }, 300);
+    
+  } catch (error) {
+    console.error("❌ Erro:", error);
+    window.__THEME_LOCKED = false;
+  } finally {
+    setIsOpen(false);
+  }
+};
+  
   const toggleMenu = () => {
     if (!isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();

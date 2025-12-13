@@ -12,11 +12,16 @@ export function ThemeSwitcher() {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return (
-      <div className="w-10 h-10 rounded-lg bg-gray-200 dark:bg-gray-800 animate-pulse"></div>
-    );
-  }
+  const handleToggle = () => {
+    // Verifica se está bloqueado (mudança de idioma em progresso)
+    if (window.__THEME_LOCKED) {
+      console.log("⏸️ Tema bloqueado durante mudança de idioma");
+      return;
+    }
+    
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+  };
 
   return (
     <button
