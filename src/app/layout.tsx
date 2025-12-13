@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/providers/next-theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
-import { auth } from "../../auth";
 import { I18nProvider } from "@/lib/providers/i18n-provider";
 import Navbar from "@/components/Navbar";
 
@@ -28,22 +27,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-950`}
       >
-        <SessionProvider session={session}>
-          <I18nProvider>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              <Navbar />
-              <Toaster />
-              {children}
-            </ThemeProvider>
-          </I18nProvider>
-        </SessionProvider>
+        <I18nProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <Navbar />
+            <Toaster />
+            {children}
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   );

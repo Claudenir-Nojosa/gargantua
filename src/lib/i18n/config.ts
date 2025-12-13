@@ -7,13 +7,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const resources = {
   en: {
     translation: {
-      // Navbar (se usar)
+      // Navbar
       "nav.home": "Home",
       "nav.about": "About",
       "nav.projects": "Projects",
       "nav.contact": "Contact",
 
-      // Títulos principais
+      // Main Content - Portfolio
       "main.portfolioTitle": "Data Science Portfolio",
       "main.name": "Claudenir Nojosa",
       "main.role": "Data Scientist & Analyst",
@@ -23,12 +23,12 @@ const resources = {
       "sidebar.tagline": '"Data never lies."',
       "sidebar.connect": "Connect with me",
 
-      // Main Content - Sobre Mim
+      // About Me
       "main.aboutMe": "About Me",
       "main.aboutQuote":
         "I am a curiosity-driven data scientist, always asking questions.",
 
-      // Main Content - Experiência Profissional
+      // Work Experience
       "main.workExperience": "Work Experience",
       "main.dataAnalyst": "Data Analyst (Freelancer)",
       "main.softwareEngineer": "Software Engineer (Freelancer)",
@@ -37,7 +37,7 @@ const resources = {
       "main.softwareEngineerDescription":
         "Development of web applications and APIs. Implementation of automation solutions and scripts for data processing. Collaboration in open source projects.",
 
-      // Main Content - Formação Acadêmica
+      // Education
       "main.education": "Education",
       "main.dataScienceDegree": "Data Science (Bachelor's)",
       "main.accountingDegree": "Accounting Sciences (Bachelor's)",
@@ -45,13 +45,13 @@ const resources = {
       "main.unifor": "UNIFOR - University of Fortaleza",
       "main.estimated": "(Estimated)",
 
-      // Main Content - Conteúdos
+      // Contents
       "main.contents": "Contents",
       "main.projects": "Projects",
       "main.studies": "Studies",
       "main.blog": "Blog",
 
-      // Main Content - Projetos
+      // Projects
       "main.projectsSection": "Projects",
       "main.churnPrediction": "Customer Churn Prediction",
       "main.churnDescription":
@@ -68,7 +68,7 @@ const resources = {
       "main.repository": "Repository",
       "main.presentation": "Presentation",
 
-      // Main Content - Estudos
+      // Studies
       "main.studiesSection": "Studies",
       "main.bayesianStats": "Bayesian Statistics",
       "main.bayesianDescription":
@@ -80,21 +80,73 @@ const resources = {
       "main.pythonDescription":
         "Tutorials and practical data analysis projects using Python.",
 
-      // Main Content - Blog
-      "main.blogSection": "Blog",
-      "main.blogDescription":
+      // BLOG TRANSLATIONS
+      "blog.hero.tagline": "Data Science Blog",
+      "blog.hero.description":
         "Check out my articles and tutorials about Data Science, Machine Learning and Data Analysis.",
-      "main.accessBlog": "Access Blog",
+      "blog.featured": "Featured Article",
+      "blog.read": "read",
+      "blog.writtenBy": "Written by",
+      "blog.readFullArticle": "Read Full Article",
+      "blog.latestArticles": "Latest Articles",
+      "blog.latestDescription": "Explore our most recent data science insights",
+      "blog.viewAll": "View All",
+      "blog.categories": "Categories",
+      "blog.quickStats": "Quick Stats",
+      "blog.totalArticles": "Total Articles",
+      "blog.monthlyReaders": "Monthly Readers",
+      "blog.categoriesCount": "Categories",
+      "blog.newsletter": "Stay Updated",
+      "blog.newsletterDescription":
+        "Get the latest data science articles delivered to your inbox",
+      "blog.newsletterPlaceholder": "Your email address",
+      "blog.subscribe": "Subscribe",
+      "blog.search": "Search articles...",
+      "blog.quickLinks": "Quick Links",
+      "blog.allArticles": "All Articles",
+      "blog.topCategories": "Top Categories",
+      "blog.builtWithPassion":
+        "Built with passion for the data science community",
+
+      // Blog Post Categories (translated versions for filter/search)
+      "blog.categories.machineLearning": "Machine Learning",
+      "blog.categories.dataAnalysis": "Data Analysis",
+      "blog.categories.deepLearning": "Deep Learning",
+      "blog.categories.dataVisualization": "Data Visualization",
+      "blog.categories.nlp": "Natural Language Processing",
+
+      // Blog Post Descriptions (these would come from your CMS/API)
+      "blog.posts.1.title":
+        "Introduction to Machine Learning: Fundamental Concepts",
+      "blog.posts.1.description":
+        "Learn the basic concepts of Machine Learning and how to start your journey in the field.",
+      "blog.posts.2.title": "Exploratory Data Analysis with Python",
+      "blog.posts.2.description":
+        "Advanced techniques to explore and visualize data before predictive modeling.",
+      "blog.posts.3.title": "Deep Learning: Modern Architectures",
+      "blog.posts.3.description":
+        "Explore advanced neural network architectures and their applications in computer vision.",
+      "blog.posts.4.title":
+        "Data Visualization with Tableau: Advanced Techniques",
+      "blog.posts.4.description":
+        "Create interactive dashboards and impactful visuals for complex corporate data analysis.",
+      "blog.posts.5.title": "Natural Language Processing in Practice",
+      "blog.posts.5.description":
+        "Real NLP applications and how to implement text models for sentiment analysis and document classification.",
 
       // Language names
       "language.english": "English",
       "language.portuguese": "Portuguese",
       "language.german": "German",
+
+      // Common
+      "common.search": "Search articles...",
+      "common.read": "read",
     },
   },
   pt: {
     translation: {
-      // Navbar (se usar)
+      // Navbar
       "nav.home": "Início",
       "nav.about": "Sobre",
       "nav.projects": "Projetos",
@@ -168,21 +220,74 @@ const resources = {
       "main.pythonDescription":
         "Tutoriais e projetos práticos de análise de dados utilizando Python.",
 
-      // Main Content - Blog
-      "main.blogSection": "Blog",
-      "main.blogDescription":
+      // BLOG TRANSLATIONS
+      "blog.hero.tagline": "Blog de Data Science",
+      "blog.hero.description":
         "Confira meus artigos e tutoriais sobre Data Science, Machine Learning e Análise de Dados.",
-      "main.accessBlog": "Acessar Blog",
+      "blog.featured": "Artigo em Destaque",
+      "blog.read": "ler",
+      "blog.writtenBy": "Escrito por",
+      "blog.readFullArticle": "Ler Artigo Completo",
+      "blog.latestArticles": "Artigos Recentes",
+      "blog.latestDescription":
+        "Explore nossas mais recentes publicações sobre ciência de dados",
+      "blog.viewAll": "Ver Todos",
+      "blog.categories": "Categorias",
+      "blog.quickStats": "Estatísticas Rápidas",
+      "blog.totalArticles": "Total de Artigos",
+      "blog.monthlyReaders": "Leitores Mensais",
+      "blog.categoriesCount": "Categorias",
+      "blog.newsletter": "Fique Atualizado",
+      "blog.newsletterDescription":
+        "Receba os últimos artigos sobre ciência de dados diretamente no seu email",
+      "blog.newsletterPlaceholder": "Seu endereço de email",
+      "blog.subscribe": "Inscrever-se",
+      "blog.search": "Buscar artigos...",
+      "blog.quickLinks": "Links Rápidos",
+      "blog.allArticles": "Todos os Artigos",
+      "blog.topCategories": "Categorias Populares",
+      "blog.builtWithPassion":
+        "Desenvolvido com paixão para a comunidade de ciência de dados",
+
+      // Blog Post Categories (translated versions for filter/search)
+      "blog.categories.machineLearning": "Machine Learning",
+      "blog.categories.dataAnalysis": "Análise de Dados",
+      "blog.categories.deepLearning": "Deep Learning",
+      "blog.categories.dataVisualization": "Visualização de Dados",
+      "blog.categories.nlp": "Processamento de Linguagem Natural",
+
+      // Blog Post Descriptions
+      "blog.posts.1.title":
+        "Introdução ao Machine Learning: Conceitos Fundamentais",
+      "blog.posts.1.description":
+        "Aprenda os conceitos básicos de Machine Learning e como começar sua jornada na área.",
+      "blog.posts.2.title": "Análise Exploratória de Dados com Python",
+      "blog.posts.2.description":
+        "Técnicas avançadas para explorar e visualizar dados antes da modelagem preditiva.",
+      "blog.posts.3.title": "Deep Learning: Arquiteturas Modernas",
+      "blog.posts.3.description":
+        "Explore arquiteturas avançadas de redes neurais e suas aplicações em visão computacional.",
+      "blog.posts.4.title":
+        "Visualização de Dados com Tableau: Técnicas Avançadas",
+      "blog.posts.4.description":
+        "Crie dashboards interativos e visuais impactantes para análises de dados corporativos complexos.",
+      "blog.posts.5.title": "Processamento de Linguagem Natural na Prática",
+      "blog.posts.5.description":
+        "Aplicações reais de NLP e como implementar modelos de texto para análise de sentimentos e classificação de documentos.",
 
       // Language names
       "language.english": "Inglês",
       "language.portuguese": "Português",
       "language.german": "Alemão",
+
+      // Common
+      "common.search": "Buscar artigos...",
+      "common.read": "ler",
     },
   },
   de: {
     translation: {
-      // Navbar (se usar)
+      // Navbar
       "nav.home": "Startseite",
       "nav.about": "Über mich",
       "nav.projects": "Projekte",
@@ -255,16 +360,69 @@ const resources = {
       "main.pythonDescription":
         "Tutorials und praktische Datenanalyseprojekte mit Python.",
 
-      // Main Content - Blog
-      "main.blogSection": "Blog",
-      "main.blogDescription":
+      // BLOG TRANSLATIONS
+      "blog.hero.tagline": "Data Science Blog",
+      "blog.hero.description":
         "Lesen Sie meine Artikel und Tutorials über Data Science, Machine Learning und Datenanalyse.",
-      "main.accessBlog": "Blog öffnen",
+      "blog.featured": "Hervorgehobener Artikel",
+      "blog.read": "lesen",
+      "blog.writtenBy": "Geschrieben von",
+      "blog.readFullArticle": "Ganzen Artikel lesen",
+      "blog.latestArticles": "Neueste Artikel",
+      "blog.latestDescription":
+        "Entdecken Sie unsere neuesten Data-Science-Erkenntnisse",
+      "blog.viewAll": "Alle anzeigen",
+      "blog.categories": "Kategorien",
+      "blog.quickStats": "Schnellstatistiken",
+      "blog.totalArticles": "Gesamtartikel",
+      "blog.monthlyReaders": "Monatliche Leser",
+      "blog.categoriesCount": "Kategorien",
+      "blog.newsletter": "Bleiben Sie informiert",
+      "blog.newsletterDescription":
+        "Erhalten Sie die neuesten Data-Science-Artikel direkt in Ihrem Posteingang",
+      "blog.newsletterPlaceholder": "Ihre E-Mail-Adresse",
+      "blog.subscribe": "Abonnieren",
+      "blog.search": "Artikel suchen...",
+      "blog.quickLinks": "Schnelllinks",
+      "blog.allArticles": "Alle Artikel",
+      "blog.topCategories": "Top-Kategorien",
+      "blog.builtWithPassion":
+        "Mit Leidenschaft für die Data-Science-Community entwickelt",
+
+      // Blog Post Categories (translated versions for filter/search)
+      "blog.categories.machineLearning": "Maschinelles Lernen",
+      "blog.categories.dataAnalysis": "Datenanalyse",
+      "blog.categories.deepLearning": "Deep Learning",
+      "blog.categories.dataVisualization": "Datenvisualisierung",
+      "blog.categories.nlp": "Natürliche Sprachverarbeitung",
+
+      // Blog Post Descriptions
+      "blog.posts.1.title":
+        "Einführung in Machine Learning: Grundlegende Konzepte",
+      "blog.posts.1.description":
+        "Lernen Sie die grundlegenden Konzepte des Machine Learnings und wie Sie Ihre Reise in diesem Bereich beginnen können.",
+      "blog.posts.2.title": "Explorative Datenanalyse mit Python",
+      "blog.posts.2.description":
+        "Fortgeschrittene Techniken zur Erkundung und Visualisierung von Daten vor der prädiktiven Modellierung.",
+      "blog.posts.3.title": "Deep Learning: Moderne Architekturen",
+      "blog.posts.3.description":
+        "Erkunden Sie fortgeschrittene neuronale Netzwerkarchitekturen und ihre Anwendungen in der Computer Vision.",
+      "blog.posts.4.title":
+        "Datenvisualisierung mit Tableau: Fortgeschrittene Techniken",
+      "blog.posts.4.description":
+        "Erstellen Sie interaktive Dashboards und eindrucksvolle Visualisierungen für komplexe Unternehmensdatenanalysen.",
+      "blog.posts.5.title": "Natürliche Sprachverarbeitung in der Praxis",
+      "blog.posts.5.description":
+        "Praktische NLP-Anwendungen und wie Sie Textmodelle für Sentiment-Analyse und Dokumentenklassifizierung implementieren können.",
 
       // Language names
       "language.english": "Englisch",
       "language.portuguese": "Portugiesisch",
       "language.german": "Deutsch",
+
+      // Common
+      "common.search": "Artikel suchen...",
+      "common.read": "lesen",
     },
   },
 };

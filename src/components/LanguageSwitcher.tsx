@@ -2,11 +2,14 @@
 
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useRouter, useParams } from "next/navigation";
 import { Globe } from "lucide-react";
 import Portal from "./Portal";
 
 export default function LanguageSwitcherGlobeFlags() {
   const { i18n } = useTranslation();
+  const router = useRouter();
+  const params = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
@@ -26,17 +29,45 @@ export default function LanguageSwitcherGlobeFlags() {
     },
   ];
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setIsOpen(false);
+  const changeLanguage = async (lng: string) => {
+    try {
+      // 1. Muda o idioma no i18n
+      await i18n.changeLanguage(lng);
+      
+      // 2. Obtém a rota atual
+      const currentPath = window.location.pathname;
+      
+      // 3. Extrai o caminho sem o idioma atual
+      // Ex: /pt/blog → /blog
+      const currentLang = params?.lang as string || 'pt';
+      let newPath = currentPath;
+      
+      // Remove o idioma atual da URL
+      if (currentPath.startsWith(`/${currentLang}`)) {
+        newPath = currentPath.replace(`/${currentLang}`, '');
+        // Se ficar vazio, coloca apenas /
+        if (newPath === '') newPath = '/';
+      }
+      
+      // 4. Adiciona o novo idioma
+      const newUrl = `/${lng}${newPath === '/' ? '' : newPath}`;
+      
+      // 5. Navega para a nova URL
+      router.push(newUrl);
+      
+    } catch (error) {
+      console.error("Erro ao mudar idioma:", error);
+    } finally {
+      setIsOpen(false);
+    }
   };
 
   const toggleMenu = () => {
-    if (!isOpen) {
-      const rect = buttonRef.current!.getBoundingClientRect();
+    if (!isOpen && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
       setMenuPosition({
         top: rect.bottom + 8,
-        left: rect.right - 48, // alinhado com o botão
+        left: rect.right - 48,
       });
     }
     setIsOpen(!isOpen);
@@ -94,7 +125,7 @@ export default function LanguageSwitcherGlobeFlags() {
                   >
                     <img
                       src={lang.flag}
-                      alt=""
+                      alt={`${lang.code} flag`}
                       className="w-8 h-6 object-cover rounded shadow-sm"
                     />
                   </button>

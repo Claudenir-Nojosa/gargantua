@@ -1,23 +1,51 @@
 // next.config.js
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
+
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-images-1.medium.com",
+        pathname: "/**",
+      },
+      // Adicione outros domínios conforme necessário
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
   webpack: (config, { isServer }) => {
-    config.externals = [...config.externals, { '@prisma/client': '@prisma/client' }];
-    
-    // Adicione esta parte se estiver usando server actions
+    config.externals = [
+      ...config.externals,
+      { "@prisma/client": "@prisma/client" },
+    ];
+
     if (isServer) {
       config.externals.push({
-        '@prisma/client': '@prisma/client',
+        "@prisma/client": "@prisma/client",
       });
     }
-    
+
     return config;
   },
 };
